@@ -1,16 +1,19 @@
 <template>
   <div class="container">
     <Header title="Task Manager"/>
+    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Tasks from './components/Tasks.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
+    Tasks,
   },
   data() {
     return {
@@ -38,6 +41,19 @@ export default {
         reminder: false
       }
     ] 
+  },
+  methods: {
+    deleteTask(id) {
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !==id ); // deleting task with the id 
+      } 
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => 
+      task.id === id ? { ...task, reminder: !task.
+      reminder } : task 
+      )
+    }
   },
 }
 </script>
