@@ -1,16 +1,44 @@
 <template>
   <div class="container">
-    <h1>Hello World!</h1>
+    <Header title="Task Manager"/>
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue'
 
 export default {
   name: 'App',
   components: {
-     
-  }
+    Header,
+  },
+  data() {
+    return {
+      tasks: []
+    }
+  },
+  created() {
+    this.tasks = [
+      {
+        id: 1,
+        text: 'Doctor Appointment',
+        day: 'February 22nd at 2:45pm',
+        reminder: true
+      },
+      {
+        id: 2,
+        text: 'University Meeting',
+        day: 'April 11th at 08:30am',
+        reminder: true
+      },
+      {
+        id: 3,
+        text: 'Shopping',
+        day: 'May 2nd 6:45pm',
+        reminder: false
+      }
+    ] 
+  },
 }
 </script>
 
@@ -56,7 +84,7 @@ body {
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.95);
 }
 
 .btn-block {
