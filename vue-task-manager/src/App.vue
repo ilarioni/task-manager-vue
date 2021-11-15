@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Manager"/>
+    <AddTask />
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 </template>
@@ -8,12 +9,14 @@
 <script>
 import Header from './components/Header.vue'
 import Tasks from './components/Tasks.vue'
+import AddTask from './components/AddTask.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
     Tasks,
+    AddTask,
   },
   data() {
     return {
