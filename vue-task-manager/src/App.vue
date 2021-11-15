@@ -1,8 +1,17 @@
 <template>
   <div class="container">
-    <Header title="Task Manager"/>
-    <AddTask />
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
+
+    <Header @toggle-add-task="toggleAddTask" title="Task Manager"/>
+
+    <div v-show="showAddTask">
+      <AddTask @add-task="addTask" />
+    </div>
+  
+    <Tasks 
+      @toggle-reminder="toggleReminder" 
+      @delete-task="deleteTask" 
+      :tasks="tasks"/>
+
   </div>
 </template>
 
@@ -20,10 +29,19 @@ export default {
   },
   data() {
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false,
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+
+    },
+    addTask(task) {
+      this.tasks = [...this.tasks, task]
+    },
+
     // on click it shows alert window asking qeustion and if yes then it will delete the task
     deleteTask(id) {
       if (confirm('Are you sure?')) {
@@ -32,7 +50,7 @@ export default {
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map((task) => 
-      task.id === id ? { ...task, reminder: !task.reminder } : task)
+      task.id === id ? { ...this.task, reminder: !task.reminder } : task)
     },
   },
   created() {
