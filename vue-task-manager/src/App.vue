@@ -20,6 +20,18 @@ export default {
       tasks: []
     }
   },
+  methods: {
+    // on click it shows alert window asking qeustion and if yes then it will delete the task
+    deleteTask(id) {
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !==id ); // deleting task with the id 
+      } 
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => 
+      task.id === id ? { ...task, reminder: !task.reminder } : task)
+    },
+  },
   created() {
     this.tasks = [
       {
@@ -41,20 +53,7 @@ export default {
         reminder: false
       }
     ] 
-  },
-  methods: {
-    deleteTask(id) {
-      if (confirm('Are you sure?')) {
-        this.tasks = this.tasks.filter((task) => task.id !==id ); // deleting task with the id 
-      } 
-    },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map((task) => 
-      task.id === id ? { ...task, reminder: !task.
-      reminder } : task 
-      )
-    }
-  },
+  }
 }
 </script>
 
